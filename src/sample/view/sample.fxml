@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="parent" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+   <children>
+       <Canvas fx:id="canvas" layoutX="151.0" layoutY="14.0" height="452.0" width="475.0"/>
+       <Label layoutX="14.0" layoutY="29.0" prefHeight="27.0" prefWidth="99.0" text="Выполнил" textAlignment="CENTER">
+           <font>
+             <Font name="Tahoma" size="18.0" />
+           </font>
+       </Label>
+       <Label layoutX="14.0" layoutY="53.0" prefHeight="24.0" prefWidth="99.0" text="Пикалов А.С." textAlignment="CENTER">
+           <font>
+             <Font name="Times New Roman" size="15.0" />
+           </font>
+       </Label>
+       <Label layoutX="14.0" layoutY="77.0" prefHeight="24.0" prefWidth="120.0" text="гр. 6202-090301D" textAlignment="CENTER" />
+      <Button fx:id="drawing" layoutX="14.0" layoutY="240.0" mnemonicParsing="false" onAction="#onActionDrawing" prefHeight="25.0" prefWidth="110.0"  text="Нарисовать" />
+      <Button fx:id="coloring" layoutX="14.0" layoutY="290.0" mnemonicParsing="false" onAction="#onActionColoring" prefHeight="25.0" prefWidth="110.0" text="Закрасить" visible="false" />
+      <Button fx:id="deleting" layoutX="14.0" layoutY="341.0" mnemonicParsing="false" onAction="#onActionDeleting" prefHeight="25.0" prefWidth="110.0" text="Очистить" visible="false" />
+   </children>
+</AnchorPane>
