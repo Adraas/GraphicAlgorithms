@@ -2,10 +2,10 @@ package sample.model.figures.abstractfigure;
 
 public class Dot {
 
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
-    public Dot(double x, double y) {
+    public Dot(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -18,11 +18,11 @@ public class Dot {
         this.y = y;
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 }

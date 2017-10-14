@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import sample.model.AlgorithmRunner;
 import sample.model.figures.abstractfigure.Dot;
 
@@ -32,6 +33,7 @@ public class Controller implements Initializable {
     private GraphicsContext graphicsContext;
     private AlgorithmRunner runner;
     private List<Dot> dots;
+    private boolean[][] coordinate;
     private int color;
     private BaseFXRobot robot;
 
@@ -43,8 +45,8 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         graphicsContext = canvas.getGraphicsContext2D();
-        graphicsContext.setFill(Color.BLACK);
         robot = new BaseFXRobot(canvas.getScene());
+        coordinate = new boolean[(int) canvas.getWidth()][(int) canvas.getHeight()];
     }
 
     @FXML
@@ -71,29 +73,51 @@ public class Controller implements Initializable {
 
     private void draw() {
         drawMountain();
-        // TODO: to draw other elements
+        drawSun();
+        drawLake();
     }
 
     private void drawMountain() {
-        // It's checking of the coordinate system
-        drawLine(new Dot(1, 300), new Dot(100, 1));
-        drawLine(new Dot(100, 1), new Dot(120, 20));
-        drawLine(new Dot(120, 20), new Dot(126, 13));
-        drawLine(new Dot(126, 13), new Dot(150, 295));
+        fillLine(Color.GRAY, new Dot(1, 300), new Dot(80, 70));
+        fillLine(Color.GRAY, new Dot(80, 70), new Dot(120, 70));
+        fillLine(Color.GRAY, new Dot(80, 70), new Dot(110, 1));
+        fillLine(Color.GRAY, new Dot(110, 1), new Dot(120, 20));
+        fillLine(Color.GRAY, new Dot(120, 20), new Dot(126, 13));
+        fillLine(Color.GRAY, new Dot(126, 13), new Dot(150, 90));
+        fillLine(Color.GRAY, new Dot(120, 70), new Dot(150, 90));
+        fillLine(Color.GRAY, new Dot(150, 90), new Dot(250, 300));
+        fillLine(Color.GRAY, new Dot(0, 300), new Dot((int) canvas.getWidth(), 300));
     }
 
-    private void drawLine(Dot startDot, Dot endDot) {
-        dots = runner.fillLine(startDot, endDot);
-        for (Dot dot : dots) {
-            double x = dot.getX();
-            double y = dot.getY();
-            graphicsContext.getPixelWriter().setColor((int) x, (int) y, Color.BLACK);
+    private void drawSun() {
+        fillCircle(Color.ORANGE, new Dot(300, 100), 25);
+    }
 
-            /*
-            It will being stay at other place. It's just checking.
-            I need to write the algorithm for coloring the figure.
-             */
-            //color = robot.getPixelColor((int) dot.getX(), (int) dot.getY());
+    private void drawLake() {
+        fillCurveBezier(Color.DARKBLUE, new Dot[]{});
+    }
+
+
+    private void fillLine(Paint paint, Dot startDot, Dot endDot) {
+        dots = runner.fillLine(coordinate, startDot, endDot);
+        drawByCoordinate(paint);
+    }
+
+    private void fillCircle(Paint paint, Dot startDot, int radius) {
+        dots = runner.fillCircle(coordinate, startDot, radius);
+        drawByCoordinate(paint);
+    }
+
+    private void fillCurveBezier(Paint paint, Dot[] controlDots) {
+        dots = runner.fillCurveBezier(coordinate, controlDots);
+        drawByCoordinate(paint);
+    }
+
+    private void drawByCoordinate(Paint paint) {
+        for (Dot dot : dots) {
+            int x = dot.getX();
+            int y = dot.getY();
+            graphicsContext.getPixelWriter().setColor(x, y, (Color) paint);
         }
     }
 
