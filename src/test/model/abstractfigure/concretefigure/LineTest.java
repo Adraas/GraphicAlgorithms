@@ -15,7 +15,7 @@ public class LineTest {
 
     @Test
     public void testDrawLine() {
-        Figure<boolean[][], Canvas> line = new Line(new Pixel(0, 0), new Pixel(4, 4), Color.BLACK);
+        Figure<boolean[][], Canvas> line = new Line(new Pixel(0, 0), new Pixel(5, 5), Color.BLACK);
         boolean[][] coordinateExpected = new boolean[5][5];
         boolean[][] coordinateActual = new boolean[5][5];
         coordinateActual[0][0] = true;

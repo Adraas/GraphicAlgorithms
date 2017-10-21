@@ -13,6 +13,7 @@ import sample.model.Pixel;
 import sample.model.abstractfigure.concretefigure.Circle;
 import sample.model.abstractfigure.concretefigure.CurveBezier;
 import sample.model.abstractfigure.concretefigure.Line;
+import sample.model.coloring.Painter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,9 +32,14 @@ public class Controller implements Initializable {
     private Button deleting;
     private GraphicsContext graphicsContext;
     private boolean[][] coordinate;
+    private Painter painter;
     private Figure<boolean[][], Canvas> line;
     private Figure<boolean[][], Canvas> circle;
     private Figure<boolean[][], Canvas> curveBezier;
+
+    public Controller() {
+        painter = new Painter();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +57,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void onActionColoring(ActionEvent actionEvent) {
-        color();
+        coloring();
         coloring.setVisible(false);
     }
 
@@ -105,7 +111,17 @@ public class Controller implements Initializable {
         curveBezier.draw(coordinate, canvas);
     }
 
-    private void color() {
-        //TODO: coloring by coordinates
+    private void coloring() {
+        painter.coloring(new Pixel(300, 110), Color.YELLOW, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(new Pixel(5, 295), Color.GRAY, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(new Pixel(1, 1), Color.LIGHTBLUE, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(new Pixel(400, 5), Color.LIGHTBLUE, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(new Pixel(270, 310), Color.AQUA, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(new Pixel(5, 310), Color.LIGHTGREEN, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        byte[][] image = new byte[][] {
+                {0, 1, 0, 0, 1, 0},
+                {1, 0, 1, 1, 0, 1}
+        };
+        painter.coloringWithImage(new Pixel(90, 67), Color.BLACK, Color.WHITE, coordinate, image, canvas.getGraphicsContext2D().getPixelWriter());
     }
 }
