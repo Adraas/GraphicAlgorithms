@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import sample.controller.clone.BooleanArray2DCloner;
 import sample.model.abstractfigure.Figure;
 import sample.model.Pixel;
 import sample.model.abstractfigure.concretefigure.Circle;
@@ -112,16 +113,49 @@ public class Controller implements Initializable {
     }
 
     private void coloring() {
-        painter.coloring(new Pixel(300, 110), Color.YELLOW, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
-        painter.coloringModifier(new Pixel(5, 295), Color.GRAY, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
-        painter.coloringModifier(new Pixel(1, 1), Color.LIGHTBLUE, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
-        painter.coloringModifier(new Pixel(400, 5), Color.LIGHTBLUE, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
-        painter.coloringModifier(new Pixel(270, 310), Color.AQUA, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
-        painter.coloringModifier(new Pixel(5, 310), Color.LIGHTGREEN, new BooleanArray2DCloner(coordinate).clone().getArray(), canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloring(
+                new Pixel(300, 110),
+                Color.YELLOW,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(
+                new Pixel(5, 295),
+                Color.GRAY,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(
+                new Pixel(1, 1),
+                Color.LIGHTBLUE,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(
+                new Pixel(400, 5),
+                Color.LIGHTBLUE,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(
+                new Pixel(270, 310),
+                Color.AQUA,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringModifier(
+                new Pixel(5, 310),
+                Color.LIGHTGREEN,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
         byte[][] image = new byte[][] {
                 {0, 1, 0, 0, 1, 0},
-                {1, 0, 1, 1, 0, 1}
+                {1, 0, 1, 1, 0, 1},
+                {1, 0, 0, 0, 0, 1},
+                {1, 0, 1, 1, 0, 1},
+                {0, 1, 0, 0, 1, 0}
         };
-        painter.coloringWithImage(new Pixel(90, 67), Color.BLACK, Color.WHITE, coordinate, image, canvas.getGraphicsContext2D().getPixelWriter());
+        painter.coloringWithImage(
+                new Pixel(90, 67),
+                Color.BLACK,
+                Color.WHITE,
+                (boolean[][]) new BooleanArray2DCloner<>(coordinate).clone().getArray(),
+                (byte[][]) new BooleanArray2DCloner<>(image).clone().getArray(),
+                canvas.getGraphicsContext2D().getPixelWriter());
     }
 }

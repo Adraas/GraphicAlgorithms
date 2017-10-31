@@ -1,29 +1,21 @@
-package sample.controller;
+package sample.controller.clone;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class BooleanArray2DCloner implements Serializable {
+public class BooleanArray2DCloner<T> implements Serializable {
     private static final long serialVersionUID = 2919017661809385476L;
-    private boolean[][] arr;
+    private T arr;
 
-    public BooleanArray2DCloner() {
-        super();
-    }
-
-    public BooleanArray2DCloner(boolean[][] arr) {
+    public BooleanArray2DCloner(T arr) {
         super();
         this.arr = arr;
     }
 
-    public boolean[][] getArray() {
+    public T getArray() {
         return arr;
-    }
-
-    public void setArray(boolean[][] arr) {
-        this.arr = arr;
     }
 
     public BooleanArray2DCloner clone() {

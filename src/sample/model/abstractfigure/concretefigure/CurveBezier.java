@@ -15,6 +15,7 @@ public class CurveBezier extends Figure<boolean[][], Canvas> {
         this.color = color;
     }
 
+
     @Override
     public void draw(boolean[][] coordinate, Canvas canvas) {
         int x, y;
@@ -27,9 +28,10 @@ public class CurveBezier extends Figure<boolean[][], Canvas> {
     }
 
     /*
-    public void DrawBezier(Pixel[] pixels, Bitmap Pixel, Color Color)
+    @Override
+    public void draw(boolean[][] coordinate, Canvas canvas)
     {
-        int length = pixels.length;
+        int length = controlPixels.length;
         int countPoints = length << 6;
         Pixel[] tempPixels = new Pixel[length];
         Pixel[] drawingPoints = new Pixel[countPoints + 1];
@@ -37,7 +39,7 @@ public class CurveBezier extends Figure<boolean[][], Canvas> {
         float t = 0f;
         for (int i = 0; i <= countPoints; i++)
         {
-            System.arraycopy(pixels, 0, tempPixels, 0, length);
+            System.arraycopy(controlPixels, 0, tempPixels, 0, length);
             for (int j = length - 1; j > 0; j--)
             {
                 for (int k = 0; k < j; k++)
@@ -51,7 +53,11 @@ public class CurveBezier extends Figure<boolean[][], Canvas> {
         }
         for (int i = 1; i < countPoints + 1; i++)
         {
-            DrawLine((int)drawingPoints[i - 1].getX(), (int)drawingPoints[i - 1].getY(), (int)drawingPoints[i].getX(), (int)drawingPoints[i].getY(), Pixel, Color);
+            canvas.getGraphicsContext2D().getPixelWriter().setColor(drawingPoints[i - 1].getX(), drawingPoints[i - 1].getY(), color);
+            coordinate[i - 1][i - 1] = true;
+            canvas.getGraphicsContext2D().getPixelWriter().setColor(drawingPoints[i].getX(), drawingPoints[i].getY(), color);
+            coordinate[i][i] = true;
+            //DrawLine((int)drawingPoints[i - 1].getX(), (int)drawingPoints[i - 1].getY(), (int)drawingPoints[i].getX(), (int)drawingPoints[i].getY(), canvas, Color);
         }
     }
     */
